@@ -1,15 +1,14 @@
 package com.mballem.curso.jasper.spring.services;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -26,8 +25,8 @@ public class JasperService {
 	@Autowired
 	private Connection connection;
 	
-	@Autowired
-	private ResourceLoader resourceLoader;
+//	@Autowired
+//	private ResourceLoader resourceLoader;
 
 	private Map<String, Object> params = new HashMap<>();
 
@@ -38,10 +37,13 @@ public class JasperService {
 	public byte[] exportarPDF(String code) {
 		byte[] bytes = null;
 		try {
-			Resource resource = resourceLoader
-					.getResource(JASPER_DIRETORIO.concat(JASPER_PREFIXO).concat(code).concat(JASPER_SUFIXO));
-			InputStream stream = resource.getInputStream();
-			JasperPrint print = JasperFillManager.fillReport(stream, params, connection);
+			File file = ResourceUtils
+				    .getFile(JASPER_DIRETORIO
+				        .concat(JASPER_PREFIXO)
+				        .concat(code).concat(JASPER_SUFIXO)
+				    );
+			JasperPrint print = JasperFillManager
+				    .fillReport(file.getAbsolutePath(), params, connection);
 			bytes = JasperExportManager.exportReportToPdf(print);
 		} catch (IOException | JRException e) {
 			e.printStackTrace();
