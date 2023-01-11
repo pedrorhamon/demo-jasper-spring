@@ -1,6 +1,5 @@
 package com.mballem.curso.jasper.spring.services;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -21,7 +20,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 public class JasperService {
 
 	private static final String JASPER_DIRETORIO = "classpath:jasper/";
-	private static final String JASPER_PREFIXO = "Funcionarios-";
+	private static final String JASPER_PREFIXO = "Funcionario-";
 	private static final String JASPER_SUFIXO = ".jasper";
 
 	@Autowired
