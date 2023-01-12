@@ -30,6 +30,10 @@ public class JasperService {
 
 	private Map<String, Object> params = new HashMap<>();
 
+	public JasperService() {
+		this.params.put("IMAGEM_DIR", JASPER_DIRETORIO);
+	}
+	
 	public void addParams(String key, Object value) {
 		this.params.put(key, value);
 	}
