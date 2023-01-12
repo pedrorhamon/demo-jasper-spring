@@ -46,7 +46,7 @@ public class JasperController {
 		response.getOutputStream().write(bytes);
 	}
 	
-	@GetMapping("/relatorio/pdf/jr9{code}")
+	@GetMapping("/relatorio/pdf/jr9/{code}")
 	public void exibirRelatorio09(@PathVariable("code") String code, 
 			@RequestParam(name = "nivel", required = false) String nivel, 
 			@RequestParam(name ="uf", required = false) String uf, 
