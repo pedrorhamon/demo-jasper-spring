@@ -32,6 +32,7 @@ public class JasperService {
 
 	public JasperService() {
 		this.params.put("IMAGEM_DIR", JASPER_DIRETORIO);
+		this.params.put("SUB_REPORT_DIR", JASPER_DIRETORIO);
 	}
 	
 	public void addParams(String key, Object value) {
@@ -41,7 +42,7 @@ public class JasperService {
 	public byte[] exportarPDF(String code) {
 		byte[] bytes = null;
 		try {
-			File file = ResourceUtils.getFile(JASPER_DIRETORIO.concat(JASPER_PREFIXO) .concat(code).concat(JASPER_SUFIXO));
+			File file = ResourceUtils.getFile(JASPER_DIRETORIO.concat(JASPER_PREFIXO).concat(code).concat(JASPER_SUFIXO));
 			JasperPrint print = JasperFillManager
 				    .fillReport(file.getAbsolutePath(), params, connection);
 			bytes = JasperExportManager.exportReportToPdf(print);
@@ -49,5 +50,5 @@ public class JasperService {
 			e.printStackTrace();
 		}
 		return bytes;
-	}
+	}	
 }
