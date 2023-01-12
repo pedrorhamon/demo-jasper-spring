@@ -12,7 +12,6 @@
     <a th:href="@{/relatorio/pdf/jr1(code='01', acao='v')}">Abrir</a>
     <a th:href="@{/relatorio/pdf/jr1(code='01', acao='d')}">Download</a>
     <br>
-    <a th:href="@{/relatorio/pdf/jr9(code='01', acao='v')}">Abrir</a>
 	<div>
     	<h2>Relatório 09</h2> 	
     	<form th:action="@{/relatorio/pdf/jr9/09}" method="get">
@@ -21,7 +20,7 @@
     			<option th:each="nivel : ${niveis}" th:value="${nivel}" th:text="${nivel}">Selecione o nivel</option>
     		</select>
     		<select id="uf" name="uf">
-    			<option value="">Selecione o nivel</option>
+    			<option value="">Selecione o UFs</option>
     			<option th:each="uf : ${ufs}" th:value="${uf}" th:text="${uf}">Selecione UFs</option>
     		</select>
     		
