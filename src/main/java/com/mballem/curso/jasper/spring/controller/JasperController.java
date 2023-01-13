@@ -65,6 +65,19 @@ public class JasperController {
 		response.getOutputStream().write(bytes);
 	}
 	
+	@GetMapping("/relatorio/pdf/j19/{code}")
+	public void exibirRelatorio19(@PathVariable("code") String code, 
+			@RequestParam(name = "idf", required = false) Long id, 
+			HttpServletResponse response) throws IOException {
+		this.service.addParams("ID_FUNCIONARIO", id);
+		
+		byte[] bytes =this.service.exportarPDF(code);
+		response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+		response.setHeader("Content-disposition", "inline; filename=relatorio-" + code + ".pdf");
+		response.getOutputStream().write(bytes);
+	}
+	
+	@GetMapping("/buscar/funcionarios")
 	public ModelAndView buscarFuncionariosPorNome(@RequestParam("nome") String nome) {
 		return new ModelAndView("reports", "funcionarios", this.funcionarioRepository.findFuncionariosByNome(nome));
 	}
