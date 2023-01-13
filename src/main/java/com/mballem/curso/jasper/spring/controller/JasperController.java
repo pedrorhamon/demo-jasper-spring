@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mballem.curso.jasper.spring.repositories.EnderecoRepository;
+import com.mballem.curso.jasper.spring.repositories.FuncionarioRepository;
 import com.mballem.curso.jasper.spring.repositories.NivelRepository;
 import com.mballem.curso.jasper.spring.services.JasperService;
 
@@ -28,6 +30,9 @@ public class JasperController {
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private FuncionarioRepository funcionarioRepository;
 	
 	@GetMapping("/reports")
 	public String abrir() {
@@ -58,6 +63,10 @@ public class JasperController {
 		response.setContentType(MediaType.APPLICATION_PDF_VALUE);
 		response.setHeader("Content-disposition", "inline; filename=relatorio-" + code + ".pdf");
 		response.getOutputStream().write(bytes);
+	}
+	
+	public ModelAndView buscarFuncionariosPorNome(@RequestParam("nome") String nome) {
+		return new ModelAndView("reports", "funcionarios", this.funcionarioRepository.findFuncionariosByNome(nome));
 	}
 	
 	@ModelAttribute("niveis")
